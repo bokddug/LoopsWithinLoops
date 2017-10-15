@@ -3,15 +3,15 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and JaeJung Hyun.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
 
 def main():
     """ Calls the other functions to demonstrate them. """
-    run_test_draw_L()
+    # run_test_draw_L()
     run_test_draw_wall_on_right()
 
 
@@ -80,9 +80,48 @@ def draw_L(window, circle, r, c):
     and m and n are small, positive integers.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    real_x=circle.center.x
+    real_y=circle.center.y
+    radius=circle.radius
+
+    x=real_x
+    y=real_y
+    for k in range(r):
+
+        for j in range(3):
+            circle1=rg.Circle(rg.Point(x,y),radius)
+            circle1.attach_to(window)
+            circle1.fill_color=circle.fill_color
+            window.render(0.1)
+            x=x+(2*radius)
+        x=real_x
+        y=y+(2*radius)
+    y1=y
+    for k in range(3):
+
+        for j in range(3):
+            circle2=rg.Circle(rg.Point(x,y1),radius)
+            circle2.attach_to(window)
+            circle2.fill_color =circle.fill_color
+            window.render(0.1)
+            x=x+(2*radius)
+        x=real_x
+        y1=y1+(2*radius)
+    x1=x+(2*radius*3)
+    y2=real_y+(2*radius*r)
+    for k in range(3):
+
+        for j in range(c):
+            circle3=rg.Circle(rg.Point(x1,y2),radius)
+            circle3.attach_to(window)
+            circle3.fill_color=circle.fill_color
+            window.render(0.1)
+            x1=x1+(2*radius)
+        x1=x+(2*radius*3)
+        y2=y2+(2*radius)
 
 
 def run_test_draw_wall_on_right():
@@ -121,10 +160,28 @@ def draw_wall_on_right(rectangle, n, window):
     and n is a small, positive integer.
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
-
+    r1=rectangle.corner_1
+    r2=rectangle.corner_2
+    r1_real=rectangle.corner_1
+    r2_real=rectangle.corner_2
+    # r1_real_x=rectangle.corner_1.x
+    # r1_real_y=rectangle.corner_1.y
+    # r2_real_x=rectangle.corner_2.x
+    # r2_real_y=rectangle.corner_2.y
+    length=r2.x-r1.x
+    height=r2.y-r1.y
+    for k in range(n):
+        for j in range(n-k):
+            rectangle=rg.Rectangle(r1,r2)
+            rectangle.attach_to(window)
+            window.render(0.1)
+            r1=rg.Point(r1.x,r1.y+height)
+            r2=(rg.Point(r2.x,r2.y+height))
+        r2=rg.Point(r2_real.x-length*(k+1),r2_real.y+height*(k+1))
+        r1=rg.Point(r1_real.x-length*(k+1),r1_real.y+height*(k+1))
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
